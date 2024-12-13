@@ -1,7 +1,7 @@
 const express = require('express');
 const connectMongoDB = require('./conn');
 const path = require('path')
-const { URL } = require('./models/URL');
+const URL = require('./models/URL');
 const { default: mongoose } = require("mongoose");
 
 const URLRoute = require('./routes/url');

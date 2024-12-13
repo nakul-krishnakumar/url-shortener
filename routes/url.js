@@ -1,4 +1,4 @@
-const { URL } = require('../models/URL');
+const URL = require('../models/URL');
 const express = require('express');
 const { 
    handleGenerateNewShortURL,
