@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>URL Shortener - Sign In</title>
+
+   <style>
+      .wrapper{
+         display: flex; flex-direction: column; gap: 2rem;
+      }
+
+      .wrapper span {
+         display: flex; 
+         justify-content: space-between;
+         align-items: center;
+      }
+
+      .wrapper input {
+         width: 200px;
+         height: 1.5rem;
+      }
+   </style>
+</head>
+<body style="background-color: rgb(13, 13, 51); color: aliceblue;">
+   <div style="
+      display: flex; 
+      width: 100wh; 
+      height: 100vh; 
+      justify-content: center; 
+      align-items: center;"
+   >  
+   <div class="wrapper" style="background-color: aliceblue; color: rgb(13, 13, 51); padding: 0rem 3rem 3rem 3rem; border-radius: 5px; margin: 0 auto;">
+      <h1>Sign In</h1>
+      <form method="POST" action="/api/user/signup">
+         <div class="wrapper">
+            <span>
+               <label for="name">Name : </label>
+               <input type="text" id="name" name="name" placeholder="Enter your name"/>
+            </span>
+
+            <span>
+               <label for="email">Email : </label>
+               <input type="email" id="email" name="email" placeholder="Enter your email" />
+            </span>
+
+            <span>
+               <label for="password">Password : </label>
+               <input type="password" id="password" name="password" placeholder="Enter your password" />
+   
+            </span>
+
+            <button type="submit">Sign Up</button>
+         </div>
+      </form>
+   </div>
+   </div>
+</body>
+</html>
