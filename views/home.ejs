@@ -4,6 +4,11 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>URL Shortener</title>
+   <style>
+      table td {
+         padding: 1rem;
+      }
+   </style>
 </head>
 <body style="background-color: rgb(13, 13, 51); color: aliceblue;">
    <div style="
@@ -23,9 +28,31 @@
       </form>
 
       <% if (locals.id) { %>
-       <p style="color: green; font-weight: 500;">URL Generated : 
-         <a href="http://localhost:8080/api/<%= id %>" target="_blank">http://localhost:8080/api/<%= id %></a>
-       </p>
+         <p style="color: green; font-weight: 500;">URL Generated : 
+            <a href="http://localhost:8080/api/<%= id %>" target="_blank">http://localhost:8080/api/<%= id %></a>
+         </p>
+      <% } %>
+
+      <% if (locals.URLs) { %>
+         <table style="padding-top: 2rem;">
+            <thead>
+               <tr>
+                  <th>SNo.</th>
+                  <th>Short ID</th>
+                  <th>Redirect</th>
+                  <th>Clicks</th>
+               </tr>
+            <tbody>
+               <% URLs.forEach((url, index) => { %>
+                  <tr>   
+                     <td><%= index + 1 %></td>   
+                     <td><a href="http://localhost:8080/api/<%= url.shortId %>" target="_blank">http://localhost:8080/api/<%= url.shortId %></a></td>   
+                     <td><%= url.redirectURL %></td>   
+                     <td><%= url.visitHistory.length %></td>   
+                  </tr>
+               <% }) %>
+            </tbody>
+         </table>
       <% } %>
    </div>
    </div>
