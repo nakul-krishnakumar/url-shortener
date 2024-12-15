@@ -80,7 +80,7 @@
 
          <% if (locals.id) { %>
             <p class="output">URL Generated : 
-               <a href="http://localhost:8080/api/<%= id %>" target="_blank">http://localhost:8080/api/<%= id %></a>
+               <a href="<%= env.HOST %>/api/<%= id %>" target="_blank"><%= env.HOST %>/api/<%= id %></a>
             </p>
          <% } %>
          
@@ -98,7 +98,7 @@
                   <% URLs.forEach((url, index) => { %>
                      <tr>   
                         <td><%= index + 1 %></td>  
-                        <td><a href="http://localhost:8080/api/<%= url.shortId %>" target="_blank">http://localhost:8080/api/<%= url.shortId%></a></td>   
+                        <td><a href="<%= env.HOST %>/api/<%= url.shortId %>" target="_blank"><%= env.HOST %>/api/<%= url.shortId%></a></td>   
                         <td title="<%= url.redirectURL %>"><%= url.redirectURL.substring(0,20) %>...</td>   
                         <td><%= url.visitHistory.length %></td>   
                      </tr>

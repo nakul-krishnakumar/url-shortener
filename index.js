@@ -10,6 +10,7 @@ const StaticRoute = require('./routes/staticRouter');
 const UserRoute = require('./routes/user');
 
 require('dotenv').config();
+global.env = process.env;
 
 const app = express();
 const PORT = process.env.PORT || 8080;
