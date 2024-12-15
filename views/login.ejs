@@ -6,34 +6,53 @@
    <title>URL Shortener - Log In</title>
 
    <style>
-      .wrapper{
+      body {
+         background-color: rgb(13, 13, 51); 
+         color: aliceblue;
+      }
+
+      .container {
+         display: flex; 
+         width: 100wh; 
+         height: 100vh; 
+         justify-content: center; 
+         align-items: center;
+      }
+
+      .wrapper {
+         background-color: aliceblue; 
+         color: rgb(13, 13, 51); 
+         padding: 0rem 3rem 3rem 3rem; 
+         border-radius: 5px; 
+         margin: 0 auto;
+      }
+
+      .form-wrapper{
          display: flex; flex-direction: column; gap: 2rem;
       }
 
-      .wrapper span {
+      .form-wrapper span {
          display: flex; 
          justify-content: space-between;
          align-items: center;
       }
 
-      .wrapper input {
+      .form-wrapper input {
          width: 200px;
          height: 1.5rem;
       }
+
+      .error {
+         color: red;
+      }
    </style>
 </head>
-<body style="background-color: rgb(13, 13, 51); color: aliceblue;">
-   <div style="
-      display: flex; 
-      width: 100wh; 
-      height: 100vh; 
-      justify-content: center; 
-      align-items: center;"
-   >  
-   <div class="wrapper" style="background-color: aliceblue; color: rgb(13, 13, 51); padding: 0rem 3rem 3rem 3rem; border-radius: 5px; margin: 0 auto;">
+<body>
+   <div class="container">  
+   <div class="wrapper">
       <h1>Log In</h1>
       <form method="POST" action="/api/user/login">
-         <div class="wrapper">
+         <div class="form-wrapper">
             <span>
                <label for="email">Email : </label>
                <input type="email" id="email" name="email" placeholder="Enter your email" />
@@ -46,7 +65,7 @@
             </span>
 
             <button type="submit">Login</button>
-            <div class="error" style="color: red;"><%= locals.error %></div>
+            <div class="error"><%= locals.error %></div>
          </div>
       </form>
    </div>
