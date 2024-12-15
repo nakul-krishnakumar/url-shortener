@@ -1,23 +1,17 @@
 const express = require('express');
 const URL = require('../models/URL');
+const { 
+   redirectToUserHome, 
+   redirectToSignUp, 
+   redirectToLogIn, 
+   logOutCurrentUser 
+} = require("../controllers/staticRouter");
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-   if (!req.user) return res.redirect('/login')
-   const URLs = await URL.find({ createdBy: req.user._id,});
-   return res.render("home", {
-      name: req.user.name,
-      URLs: URLs,
-   });
-})
-
-router.get('/signup', async (req, res) => {
-   return res.render('signup');
-})
-
-router.get('/login', async (req, res) => {
-   return res.render('login');
-})
+router.get('/', redirectToUserHome);
+router.get('/signup', redirectToSignUp);
+router.get('/login', redirectToLogIn);
+router.get('/logout', logOutCurrentUser);
 
 module.exports = router;

@@ -5,6 +5,11 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>URL Shortener</title>
    <style>
+      * {
+         box-sizing: border-box;
+         margin: 0 auto;
+      }
+
       body {
          background-color: rgb(13, 13, 51); 
          color: aliceblue;
@@ -12,18 +17,41 @@
       
       .container {
          display: flex; 
-         width: 100wh; 
-         height: 100vh; 
-         justify-content: center; 
+         flex-direction: column;
+         width: 40vw;
+         height: 90vh; 
+         justify-content: flex-start; 
          align-items: center;
+
+         gap: 25vh;
+      }
+
+      .log-out {
+         display: flex;
+         padding-top: 3rem;
+         width: 100%;
+      }
+
+      .log-out button {
+         margin-right: 0;
+         padding: 7px 15px;
       }
 
       .wrapper {
+         width: 100%;
          background-color: aliceblue;
          color: rgb(13, 13, 51); 
-         padding: 0rem 3rem 3rem 3rem; 
+         padding: 3rem; 
          border-radius: 5px; 
          margin: 0 auto;
+      }
+
+      .wrapper form {
+         padding-top: 1rem;
+      }
+
+      .wrapper h3 {
+         padding-top: 2rem;
       }
 
       .output {
@@ -37,45 +65,48 @@
    </style>
 </head>
 <body>
-   <div class="container">  
-   <div class="wrapper">
-      <h1>Hi, <%= locals.name %></h1>
-      <h2>Generate Shorthand URL for any URL !</h2>
-      <form method="POST" action="/api/url">
-         <label for="redirectURL">Enter URL here: </label>
-         <input type="text" min="10" name="url" placeholder="https://example.com" size="50px"/>
-         <button>Generate</button> 
+   <div class="container"> 
+      <form class="log-out" method="get" action="/logout">
+            <button type="submit">Log Out</button>
       </form>
+      <div class="wrapper">
+         <h1>Hi, <%= locals.name %></h1>
+         <h2>Generate Shorthand URL for any URL !</h2>
+         <form method="POST" action="/api/url">
+            <label for="redirectURL">Enter URL here: </label>
+            <input type="text" min="10" name="url" placeholder="https://example.com" size="50px"/>
+            <button>Generate</button> 
+         </form>
 
-      <% if (locals.id) { %>
-         <p class="output">URL Generated : 
-            <a href="http://localhost:8080/api/<%= id %>" target="_blank">http://localhost:8080/api/<%= id %></a>
-         </p>
-      <% } %>
-
-      <% if (locals.URLs) { %>
-         <table style="padding-top: 2rem;">
-            <thead>
-               <tr>
-                  <th>SNo.</th>
-                  <th>Short ID</th>
-                  <th>Redirect</th>
-                  <th>Clicks</th>
-               </tr>
-            <tbody>
-               <% URLs.forEach((url, index) => { %>
-                  <tr>   
-                     <td><%= index + 1 %></td>  
-                     <%= console.log(url.shortId) %> 
-                     <td><a href="http://localhost:8080/api/<%= url.shortId %>" target="_blank">http://localhost:8080/api/<%= url.shortId%></a></td>   
-                     <td title="<%= url.redirectURL %>"><%= url.redirectURL.substring(0,20) %>...</td>   
-                     <td><%= url.visitHistory.length %></td>   
+         <% if (locals.id) { %>
+            <p class="output">URL Generated : 
+               <a href="http://localhost:8080/api/<%= id %>" target="_blank">http://localhost:8080/api/<%= id %></a>
+            </p>
+         <% } %>
+         
+         <h3>Your History:</h3>
+         <% if (locals.URLs) { %>
+            <table>
+               <thead>
+                  <tr>
+                     <th>SNo.</th>
+                     <th>Short ID</th>
+                     <th>Redirect</th>
+                     <th>Clicks</th>
                   </tr>
-               <% }) %>
-            </tbody>
-         </table>
-      <% } %>
-   </div>
+               <tbody>
+                  <% URLs.forEach((url, index) => { %>
+                     <tr>   
+                        <td><%= index + 1 %></td>  
+                        <td><a href="http://localhost:8080/api/<%= url.shortId %>" target="_blank">http://localhost:8080/api/<%= url.shortId%></a></td>   
+                        <td title="<%= url.redirectURL %>"><%= url.redirectURL.substring(0,20) %>...</td>   
+                        <td><%= url.visitHistory.length %></td>   
+                     </tr>
+                  <% }) %>
+               </tbody>
+            </table>
+         <% } %>
+      </div>
    </div>
 </body>
 </html>
