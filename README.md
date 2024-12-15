@@ -29,3 +29,7 @@ npm install
 ```bash
 npm start
 ```
+### Want to contribute?
+   - Create an issue asking for the repo .env file
+   - Fork the repo
+   - Create a pull req linking to the issue
