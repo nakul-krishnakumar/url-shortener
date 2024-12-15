@@ -9,8 +9,10 @@ const URLRoute = require('./routes/url');
 const StaticRoute = require('./routes/staticRouter');
 const UserRoute = require('./routes/user');
 
+require('dotenv').config();
+
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 
 // MIDDLEWARES
 app.use(express.json());
@@ -21,7 +23,7 @@ app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"))
 
 // MONGODB CONNECTION
-connectMongoDB('mongodb://127.0.0.1:27017/shorturl')
+connectMongoDB(`mongodb+srv://nakulkrishnakumar86:${process.env.DB_PASS}@cluster0.ahrfp.mongodb.net/short-url?retryWrites=true&w=majority&appName=Cluster0`)
    .then(() => console.log("Successfully Connect to MongoDB"))
    .catch((err) => console.log("Error Connecting to DB: ", err));
 
