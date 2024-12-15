@@ -1,7 +1,7 @@
 const URL = require('../models/URL');
 
 async function redirectToUserHome(req, res) {
-   if (!req.user) return res.redirect('/login')
+   if (!req.user) return res.redirect('/signup');
    const URLs = await URL.find({ createdBy: req.user._id,});
    return res.render("home", {
       name: req.user.name,
