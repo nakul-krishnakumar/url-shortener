@@ -10,21 +10,33 @@ async function handleGenerateNewShortURL(req, res) {
    }
 
    const shortID = shortid();
+   const flag = await URL.find({ redirectURL: body.url});
 
-   await URL.create({
-      shortId: shortID,
-      redirectURL: body.url,
-      visitHistory: [],
-      createdBy: req.user._id,
-   });
+   console.log(flag)
+   if (flag.length === 0) {
+      await URL.create({
+         shortId: shortID,
+         redirectURL: body.url,
+         visitHistory: [],
+         createdBy: req.user._id,
+      });
+      
+      const URLs = await URL.find({ createdBy: req.user._id,});
 
-   const URLs = await URL.find({ createdBy: req.user._id,});
+      return res.render("home", {
+         "name": req.user.name,
+         "id" : shortID,
+         "URLs": URLs
+      });
 
-   return res.render("home", {
-      "name": req.user.name,
-      "id" : shortID,
-      "URLs": URLs
-   });
+   } else {
+      const URLs = await URL.find({ createdBy: req.user._id,});
+
+      return res.render("home", {
+         name: req.user.name,
+         URLs: URLs,
+      });
+   }
 }
 
 async function handleAnalytics(req, res) {
