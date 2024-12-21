@@ -17,11 +17,11 @@ async function handleUserLogin(req, res) {
    const { email, password } = req.body;
    const user = await User.findOne({ email, password });
 
-   const URLs = await URL.find({ createdBy: user._id });
-
    if (!user) return res.status(404).render('login', {
       error: 'Invalid Username or Password'
    })
+   
+   const URLs = await URL.find({ createdBy: user._id });
 
    const token = setUser({ _id: user._id, name: user.name });
    res.cookie("token", token);
